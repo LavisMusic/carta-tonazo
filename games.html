@@ -497,7 +497,7 @@ body::before{
 
       <div class="step active bb-setup" id="bb-setup">
         <h2 class="game-title">Botella Borracha</h2>
-        <p class="game-sub">Elige cuántos jugadores participan (máximo 15) y gira la botella.</p>
+        <p class="game-sub">Elige cuántos jugadores participan (máximo 15) y gira la botella.<br>Omitir el reto o pregunta cuesta un shot o la cantidad de shots que se indica.</p>
 
         <div class="field">
           <label>Número de jugadores</label>
@@ -631,7 +631,55 @@ const YN_QUESTIONS = [
   "Yo nunca nunca he dicho que no me gustaba alguien cuando sí.",
   "Yo nunca nunca he querido repetir un beso.",
   "Yo nunca nunca he sentido atracción por alguien prohibido.",
-  "Yo nunca nunca he pensado \"esto se está poniendo interesante\" en una fiesta."
+  "Yo nunca nunca he pensado \"esto se está poniendo interesante\" en una fiesta.",
+  "Yo nunca nunca tuve sexo en la discoteca.",
+  "Yo nunca nunca tuve celos de mi ex.",
+  "Yo nunca nunca le eché ojo a la amiga o amigo de mi flac@.",
+  "Yo nunca nunca hice un oral.",
+  "Yo nunca nunca dí un beso con tufo a cigarro.",
+  "Yo nunca nunca vomité en plena fiesta.",
+  "Yo nunca nunca me emborracho rápido.",
+  "Yo nunca nunca tuve sexo en la ducha.",
+  "Yo nunca nunca hice bulla cogiendo.",
+  "Yo nunca nunca lo hice en pose perrito.",
+  "Yo nunca nunca le dije a un ex \"siempre serás mía\".",
+  "Yo nunca nunca tuve sexo en la calle.",
+  "Yo nunca nunca he chupado una teta.",
+  "Yo nunca nunca hice problemas por las puras.",
+  "Yo nunca nunca tuve sexo en la piscina.",
+  "Yo nunca nunca ligué a una vecina.",
+  "Yo nunca nunca tuve sexo con una vecina.",
+  "Yo nunca nunca tuve sexo en un bus.",
+  "Yo nunca nunca cogí frente al mar.",
+  "Yo nunca nunca chupé un pene.",
+  "Yo nunca nunca tuve sexo anal.",
+  "Yo nunca nunca ligué con un profesor.",
+  "Yo nunca nunca caché en la escuela.",
+  "Yo nunca nunca me metí el dedo al culo.",
+  "Yo nunca nunca me metí un pedo en plena clase.",
+  "Yo nunca nunca me vine dentro.",
+  "Yo nunca nunca me quedé dormido en la calle.",
+  "Yo nunca nunca me escapé de mi casa.",
+  "Yo nunca nunca me escapé sin que se entere mi flac@.",
+  "Yo nunca nunca me enamoré de un saliente.",
+  "Yo nunca nunca tuve un agarre.",
+  "Yo nunca nunca lo hice en un balcón.",
+  "Yo nunca nunca mostré la teta a nadie.",
+  "Yo nunca nunca mostré el pene a nadie.",
+  "Yo nunca nunca hice beso de 3.",
+  "Yo nunca nunca hice beso de 4 o más de 4.",
+  "Yo nunca nunca he sido aburrid@.",
+  "Yo nunca nunca he faltado a clase.",
+  "Yo nunca nunca he pisado una cucaracha.",
+  "Yo nunca nunca he chapado un campanero.",
+  "Yo nunca nunca he chapado con un amigo.",
+  "Yo nunca nunca he cachado y nadie se ha enterado.",
+  "Yo nunca nunca tuve un squirt.",
+  "Yo nunca nunca busqué bronca por alguien.",
+  "Yo nunca nunca he traicionado a un amigo.",
+  "Yo nunca nunca hui de la policia.",
+  "Yo nunca nunca estuve en el calabozo.",
+  "Yo nunca nunca maneje sin licencia."
 ];
 
 const BB_QUESTIONS = [
@@ -674,7 +722,37 @@ const BB_QUESTIONS = [
   "¿Quién tiene más pinta de romper corazones?",
   "¿Quién sería el más romántico/a en secreto?",
   "¿Quién mentiría peor si le preguntan si alguien le gusta?",
-  "¿Quién de aquí tiene más cara de travieso/a?"
+  "¿Quién de aquí tiene más cara de travieso/a?",
+  "¿Cuántos novios tuviste?",
+  "¿Alguna vez tuviste sexo con alguien prohibido?",
+  "Siendo realista, ¿crees que tu pareja actual es el amor de tu vida?",
+  "¿Te gustaría tener una relación abierta?",
+  "¿Crees en Dios?",
+  "¿Perdonarías a tu pareja después cachar con otro?",
+  "¿Cuál es el peor error que has cometido en tu relación?",
+  "¿Has sido infiel?",
+  "¿Quieres tener hijos?",
+  "¿A qué edad tuviste tu primera relación sexual?",
+  "¿A qué edad empezaste a jugar la botella borracha?",
+  "¿Estás borrach@?",
+  "¿Cuántas veces te masturbaste el mismo día?",
+  "¿Cuánto tardas en alistarte para salir a tonear?",
+  "¿Cuánta plata piensas gastar esta noche?",
+  "¿Quién te enseñó a ver porno?",
+  "¿Ves porno?",
+  "¿Te gustan las lesbianas?",
+  "¿Te consideras bisexual?",
+  "¿Alguna vez sentiste atracción por alguien de tu mismo sexo?",
+  "¿Tuviste una relación en secreto?",
+  "¿Cuánto media el pene más grande que has visto?",
+  "¿Quién es la persona más rara que conoces?",
+  "¿Quién te hace cagar de risa?",
+  "¿Qué ex consideras que te lo hizo mejor?",
+  "¿Cuál es tu posición sexual fav?",
+  "¿Qué tan bien te sabes poner en cuatro?",
+  "¿Qué tan bien te sabes mover en la cama?",
+  "¿Cuál es tu puntuación, según tú, de calidad de cache?",
+  "¿Quién consideras que te ha besado más rico?"
 ];
 
 const BB_ANGEL = [
@@ -697,7 +775,23 @@ const BB_ANGEL = [
   "Déjate poner un apodo temporal por el grupo.",
   "Haz una llamada falsa como si estuvieras ligando.",
   "Haz 5 sentadillas mientras dices el nombre de tu crush.",
-  "Deja que alguien escriba un emoji en tu frente con el dedo."
+  "Deja que alguien escriba un emoji en tu frente con el dedo.",
+  "Tómate un selfie y envíalo a la pantalla.",
+  "Grita \"ESTOY EMPILADO CTMR\".",
+  "Lanza un piropo a alguien de tu mismo sexo.",
+  "Lanza un piropo a alguien del sexo opuesto.",
+  "Haz un submarino de 10 segundos.",
+  "Envíale un beso volado a un desconocido, si no lo haces tomas 2 shots.",
+  "Envíale un mensaje a tu ex.",
+  "Envíale un mensaje a tu crush confesándote.",
+  "Ambos jugadores tienen que bailar por 10 segundos, 2 shots cada uno si no lo hacen.",
+  "Beso en la frente al de tu drcha.",
+  "Media luna al de la izq.",
+  "Debes un trago al grupo.",
+  "Pon un hielo en tu boca por 20 segundos.",
+  "Perrea sol@ por 10 segundos.",
+  "Beso en el cachete al de tu drcha.",
+  "Beso en el cachete al de tu izq."
 ];
 
 const BB_DEVIL = [
@@ -720,8 +814,48 @@ const BB_DEVIL = [
   "Dale un beso al gánster del grupo.",
   "Chápate al que llevas ojeando.",
   "Elije con quien te vas esta noche.",
-  "Haz una confesión picante sin decir nombres."
+  "Haz una confesión picante sin decir nombres.",
+  "Entra al baño con la persona que está a tu izq.",
+  "Dale un piquito a la persona de la drcha.",
+  "Entra al baño con la persona que está a tu drcha.",
+  "Dale un piquito a la persona de la izq.",
+  "Agárrale una teta por encima de la ropa a la persona que está a tu drcha.",
+  "Agárrale una teta por encima de la ropa a la persona que está a tu izq.",
+  "Agárrale una teta por debajo de la ropa a la persona que está a la izq.",
+  "Agárrale una teta por debajo de la ropa a la persona que está a la drcha.",
+  "Huele el cuello de la persona que está a tu lado derecho.",
+  "Huele el cuello de la persona que está a tu lado izq.",
+  "Mira a los ojos a la persona que está a tu izq y hazle gestos coquetos.",
+  "Mira a los ojos a la persona que está a tu drcha y hazle gestos coquetos.",
+  "Agarra la cintura de la persona de tu drcha por 5 segundos.",
+  "Agarra la cintura de la persona de tu izq por 5 segundos.",
+  "Elige a dos personas para darse un beso de 3, si no cumplen deben un shot.",
+  "Grita que estás solter@.",
+  "Enseña un video intimo al grupo.",
+  "Saca a perrear a tu acompañante.",
+  "Perrea sol@ por 10 segundos.",
+  "Dale una nalgada a la persona de la derecha.",
+  "Dale una nalgada a la persona de la izq.",
+  "Beso de 10 segundos, si no cumplen, deben 2 shots cada uno.",
+  "Besa el pecho de tu acompañante.",
+  "Apriétale la nalga a la persona de la izq.",
+  "Apriétale la nalga a la persona de la drcha.",
+  "Besa a alguien del mismo sexo.",
+  "Tómate un selfie con piquito y reprodúcelo en la pantalla, si no lo haces tomas 3 shots.",
+  "Pon hielo en tu boca por 30 segundos."
 ];
+
+/* =========================================================
+   UTIL — orden aleatorio real (Fisher-Yates)
+   ========================================================= */
+function shuffleArray(arr){
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
 
 /* =========================================================
    TABS
@@ -744,7 +878,9 @@ document.querySelectorAll(".tab-btn").forEach(btn => {
   const ring = document.getElementById("yn-ring");
   ring.style.strokeDasharray = RING_C.toFixed(2);
 
+  let ynPool = shuffleArray(YN_QUESTIONS);
   let idx = 0;
+  let round = 1;
   let timeLeft = 60;
   let timerId = null;
 
@@ -754,8 +890,8 @@ document.querySelectorAll(".tab-btn").forEach(btn => {
   const boxEl = document.getElementById("yn-box");
 
   function renderQuestion(){
-    qEl.textContent = YN_QUESTIONS[idx];
-    roundEl.textContent = "Ronda " + (idx + 1);
+    qEl.textContent = ynPool[idx];
+    roundEl.textContent = "Ronda " + round;
   }
 
   function updateRing(){
@@ -783,7 +919,12 @@ document.querySelectorAll(".tab-btn").forEach(btn => {
   }
 
   function nextQuestion(){
-    idx = (idx + 1) % YN_QUESTIONS.length;
+    idx++;
+    if (idx >= ynPool.length){
+      ynPool = shuffleArray(YN_QUESTIONS);
+      idx = 0;
+    }
+    round++;
     renderQuestion();
     startTimer();
   }
@@ -798,7 +939,9 @@ document.querySelectorAll(".tab-btn").forEach(btn => {
   document.getElementById("yn-begin").addEventListener("click", () => {
     document.getElementById("yn-start").classList.remove("active");
     document.getElementById("yn-play").classList.add("active");
+    ynPool = shuffleArray(YN_QUESTIONS);
     idx = 0;
+    round = 1;
     renderQuestion();
     startTimer();
   });
@@ -823,12 +966,10 @@ document.querySelectorAll(".tab-btn").forEach(btn => {
   let playerCount = 4;
   let players = [];
 
-  let qPool = shuffleless(BB_QUESTIONS);
-  let angelPool = BB_ANGEL.slice();
-  let devilPool = BB_DEVIL.slice();
+  let qPool = shuffleArray(BB_QUESTIONS);
+  let angelPool = shuffleArray(BB_ANGEL);
+  let devilPool = shuffleArray(BB_DEVIL);
   let qIdx = 0, angelIdx = 0, devilIdx = 0;
-
-  function shuffleless(arr){ return arr.slice(); } // orden fijo (menor a mayor intensidad)
 
   const countEl = document.getElementById("bb-count");
   const namesToggle = document.getElementById("bb-names-toggle");
@@ -987,8 +1128,8 @@ document.querySelectorAll(".tab-btn").forEach(btn => {
   }
 
   document.getElementById("bb-pick-pregunta").addEventListener("click", () => {
-    const text = qPool[qIdx % qPool.length];
-    qIdx++;
+    if (qIdx >= qPool.length){ qPool = shuffleArray(BB_QUESTIONS); qIdx = 0; }
+    const text = qPool[qIdx++];
     document.getElementById("bb-reveal-text").textContent = text;
     showStep(stepReveal);
   });
@@ -998,15 +1139,15 @@ document.querySelectorAll(".tab-btn").forEach(btn => {
   });
 
   document.getElementById("bb-pick-angel").addEventListener("click", () => {
-    const text = angelPool[angelIdx % angelPool.length];
-    angelIdx++;
+    if (angelIdx >= angelPool.length){ angelPool = shuffleArray(BB_ANGEL); angelIdx = 0; }
+    const text = angelPool[angelIdx++];
     document.getElementById("bb-reveal-text").textContent = text;
     showStep(stepReveal);
   });
 
   document.getElementById("bb-pick-devil").addEventListener("click", () => {
-    const text = devilPool[devilIdx % devilPool.length];
-    devilIdx++;
+    if (devilIdx >= devilPool.length){ devilPool = shuffleArray(BB_DEVIL); devilIdx = 0; }
+    const text = devilPool[devilIdx++];
     document.getElementById("bb-reveal-text").textContent = text;
     showStep(stepReveal);
   });
