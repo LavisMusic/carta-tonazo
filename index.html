@@ -235,9 +235,76 @@
     text-transform: none;
   }
 
+  /* ---------- MENU TABS ---------- */
+  .menu-tabs{
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 40px;
+  }
+
+  .menu-tab-btn{
+    font-family:'Audiowide', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 14px 6px;
+    cursor: pointer;
+    transition: all .2s ease;
+    text-align:center;
+    line-height:1.3;
+  }
+
+  .menu-tab-btn.active{
+    color: var(--bg-void);
+    background: var(--neon-cyan);
+    border-color: var(--neon-cyan);
+    box-shadow: 0 0 18px rgba(41,224,255,0.55);
+  }
+
+  .menu-tab-panel{ display:none; }
+  .menu-tab-panel.active{ display:block; animation: menuTabFade .35s ease; }
+
+  @keyframes menuTabFade{ from{ opacity:0; transform: translateY(6px);} to{ opacity:1; transform:none; } }
+
+  /* ---------- FLOATING GAMES BUTTON ---------- */
+  .play-fab{
+    position: fixed;
+    right: 20px;
+    bottom: 22px;
+    z-index: 40;
+    display:flex;
+    align-items:center;
+    gap: 9px;
+    font-family:'Audiowide', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration:none;
+    color: var(--bg-void);
+    background: var(--neon-lime);
+    padding: 14px 20px;
+    border-radius: 999px;
+    box-shadow: 0 0 16px rgba(228,255,46,0.55), 0 4px 18px rgba(0,0,0,0.45);
+    animation: fabPulse 2.6s infinite;
+  }
+
+  .play-fab svg{ width: 18px; height:18px; }
+
+  @keyframes fabPulse{
+    0%, 100% { box-shadow: 0 0 16px rgba(228,255,46,0.55), 0 4px 18px rgba(0,0,0,0.45); }
+    50% { box-shadow: 0 0 26px rgba(228,255,46,0.85), 0 4px 18px rgba(0,0,0,0.45); }
+  }
+
   @media (max-width: 480px){
     body{ padding: 32px 14px 60px; }
     .tagline{ letter-spacing: 3px; }
+    .menu-tabs{ grid-template-columns: repeat(2, 1fr); }
+    .play-fab{ right: 14px; bottom: 16px; padding: 12px 16px; font-size: 0.7rem; }
   }
 </style>
 </head>
@@ -250,100 +317,297 @@
 
     <div class="divider"></div>
 
-    <section class="section-block">
-      <div class="section-kicker">
-        <span class="num">01</span>
-        <span class="label">Pack con Whisky</span>
-      </div>
-      <div class="grid">
+    <a class="play-fab" href="games.html" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="7" width="20" height="10" rx="5"></rect>
+        <circle cx="7.5" cy="12" r="1.6" fill="currentColor" stroke="none"></circle>
+        <circle cx="16.5" cy="10.3" r="1.1" fill="currentColor" stroke="none"></circle>
+        <circle cx="16.5" cy="13.7" r="1.1" fill="currentColor" stroke="none"></circle>
+      </svg>
+      Juegos
+    </a>
 
-        <a class="card" href="games.html" target="_blank" rel="noopener">
-          <div class="tier">Combo chico</div>
-          <div class="pack-name">Old Time Clásico <span class="plus">+</span> Pepsi</div>
-          <div class="sizes">750ml + 750ml</div>
-          <div class="price-row">
-            <span class="price-label">Precio</span>
-            <span class="price">S/ 50</span>
+    <div class="menu-tabs">
+      <button class="menu-tab-btn active" data-menu-tab="bebidas">Bebidas</button>
+      <button class="menu-tab-btn" data-menu-tab="wisky">Pack con Wisky</button>
+      <button class="menu-tab-btn" data-menu-tab="vodka">Pack con Vodka</button>
+      <button class="menu-tab-btn" data-menu-tab="ron">Pack con Ron</button>
+    </div>
+
+    <div class="menu-tab-panel active" id="menu-tab-bebidas">
+      <section class="section-block">
+        <div class="grid">
+
+          <div class="card">
+            <div class="pack-name">Coca Cola</div>
+            <div class="sizes">Personal</div>
+            <div class="price-row">
+              <span class="price-label">Precio</span>
+              <span class="price">S/ 5</span>
+            </div>
           </div>
-        </a>
 
-        <a class="card" href="games.html" target="_blank" rel="noopener">
-          <div class="tier">Combo mediano</div>
-          <div class="pack-name">Old Time Clásico <span class="plus">+</span> Pepsi</div>
-          <div class="sizes">750ml + 1L</div>
-          <div class="price-row">
-            <span class="price-label">Precio</span>
-            <span class="price">S/ 55</span>
+          <div class="card">
+            <div class="pack-name">Guaraná</div>
+            <div class="sizes">Personal</div>
+            <div class="price-row">
+              <span class="price-label">Precio</span>
+              <span class="price">S/ 5</span>
+            </div>
           </div>
-        </a>
 
-        <a class="card" href="games.html" target="_blank" rel="noopener">
-          <div class="tier">Combo grande</div>
-          <div class="pack-name">Old Time Clásico <span class="plus">+</span> Pepsi</div>
-          <div class="sizes">1L + 1.5L</div>
-          <div class="price-row">
-            <span class="price-label">Precio</span>
-            <span class="price">S/ 65</span>
+          <div class="card">
+            <div class="pack-name">Pepsi</div>
+            <div class="sizes">Personal</div>
+            <div class="price-row">
+              <span class="price-label">Precio</span>
+              <span class="price">S/ 5</span>
+            </div>
           </div>
-        </a>
 
-        <a class="card" href="games.html" target="_blank" rel="noopener">
-          <div class="tier">Combo XL</div>
-          <div class="pack-name">Old Time Clásico <span class="plus">+</span> Pepsi</div>
-          <div class="sizes">1L + 1.5L</div>
-          <div class="price-row">
-            <span class="price-label">Precio</span>
-            <span class="price">S/ 70</span>
+          <div class="card">
+            <div class="pack-name">Agua Manantial</div>
+            <div class="price-row">
+              <span class="price-label">Precio</span>
+              <span class="price">S/ 2</span>
+            </div>
           </div>
-        </a>
 
-      </div>
-    </section>
+        </div>
+      </section>
+    </div>
 
-    <section class="section-block">
-      <div class="section-kicker">
-        <span class="num">02</span>
-        <span class="label">Con Old Time de Manzana</span>
-      </div>
-      <div class="grid">
+    <div class="menu-tab-panel" id="menu-tab-wisky">
+      <section class="section-block">
+        <div class="section-kicker">
+          <span class="num">01</span>
+          <span class="label">Old Time Red</span>
+        </div>
+        <div class="grid">
 
-        <a class="card" href="games.html" target="_blank" rel="noopener">
-          <div class="tier">Combo chico</div>
-          <div class="pack-name">Old Time Manzana <span class="plus">+</span> Pepsi</div>
-          <div class="sizes">750ml + 750ml</div>
-          <div class="price-row">
-            <span class="price-label">Precio</span>
-            <span class="price">S/ 45</span>
+          <div class="card">
+            <div class="tier">Combo 1</div>
+            <div class="pack-name">Old Time RED <span class="plus">+</span> Guaraná</div>
+            <div class="sizes">750ml + 750ml</div>
+            <div class="price-row">
+              <span class="price-label">Precio</span>
+              <span class="price">S/ 50</span>
+            </div>
           </div>
-        </a>
 
-        <a class="card" href="games.html" target="_blank" rel="noopener">
-          <div class="tier">Combo mediano</div>
-          <div class="pack-name">Old Time Manzana <span class="plus">+</span> Pepsi</div>
-          <div class="sizes">750ml + 1L</div>
-          <div class="price-row">
-            <span class="price-label">Precio</span>
-            <span class="price">S/ 50</span>
+          <div class="card">
+            <div class="tier">Combo 2</div>
+            <div class="pack-name">Old Time RED <span class="plus">+</span> Guaraná</div>
+            <div class="sizes">750ml + 1L</div>
+            <div class="price-row">
+              <span class="price-label">Precio</span>
+              <span class="price">S/ 55</span>
+            </div>
           </div>
-        </a>
 
-        <a class="card" href="games.html" target="_blank" rel="noopener">
-          <div class="tier">Combo grande</div>
-          <div class="pack-name">Old Time Manzana <span class="plus">+</span> Pepsi</div>
-          <div class="sizes">750ml + 1.5L</div>
-          <div class="price-row">
-            <span class="price-label">Precio</span>
-            <span class="price">S/ 55</span>
+          <div class="card">
+            <div class="tier">Combo 3</div>
+            <div class="pack-name">Old Time RED <span class="plus">+</span> Guaraná</div>
+            <div class="sizes">1L + 1L</div>
+            <div class="price-row">
+              <span class="price-label">Precio</span>
+              <span class="price">S/ 60</span>
+            </div>
           </div>
-        </a>
 
-      </div>
-    </section>
+          <div class="card">
+            <div class="tier">Combo 4</div>
+            <div class="pack-name">Old Time RED <span class="plus">+</span> Everest</div>
+            <div class="sizes">750ml + 1.5L</div>
+            <div class="price-row">
+              <span class="price-label">Precio</span>
+              <span class="price">S/ 55</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="tier">Combo 5</div>
+            <div class="pack-name">Old Time RED <span class="plus">+</span> Everest</div>
+            <div class="sizes">1L + 1.5L</div>
+            <div class="price-row">
+              <span class="price-label">Precio</span>
+              <span class="price">S/ 60</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <section class="section-block">
+        <div class="section-kicker">
+          <span class="num">02</span>
+          <span class="label">Old Time Green</span>
+        </div>
+        <div class="grid">
+
+          <div class="card">
+            <div class="tier">Combo 1</div>
+            <div class="pack-name">Old Time <span class="plus">+</span> Guaraná</div>
+            <div class="sizes">750ml + 750ml</div>
+            <div class="price-row">
+              <span class="price-label">Precio</span>
+              <span class="price">S/ 45</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="tier">Combo 2</div>
+            <div class="pack-name">Old Time <span class="plus">+</span> Guaraná</div>
+            <div class="sizes">750ml + 1L</div>
+            <div class="price-row">
+              <span class="price-label">Precio</span>
+              <span class="price">S/ 50</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="tier">Combo 3</div>
+            <div class="pack-name">Old Time <span class="plus">+</span> Everest</div>
+            <div class="sizes">750ml + 1.5L</div>
+            <div class="price-row">
+              <span class="price-label">Precio</span>
+              <span class="price">S/ 55</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+    </div>
+
+    <div class="menu-tab-panel" id="menu-tab-vodka">
+      <section class="section-block">
+        <div class="section-kicker">
+          <span class="num">01</span>
+          <span class="label">Smirnoff Strawberry</span>
+        </div>
+        <div class="grid">
+
+          <div class="card">
+            <div class="tier">Combo 1</div>
+            <div class="pack-name">Smirnoff Strawberry <span class="plus">+</span> Everest</div>
+            <div class="sizes">750ml + 1.5L</div>
+            <div class="price-row">
+              <span class="price-label">Precio</span>
+              <span class="price">S/ 55</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <section class="section-block">
+        <div class="section-kicker">
+          <span class="num">02</span>
+          <span class="label">Smirnoff Clásico</span>
+        </div>
+        <div class="grid">
+
+          <div class="card">
+            <div class="tier">Combo 1</div>
+            <div class="pack-name">Smirnoff <span class="plus">+</span> Everest</div>
+            <div class="sizes">1L + 1.5L</div>
+            <div class="price-row">
+              <span class="price-label">Precio</span>
+              <span class="price">S/ 60</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+    </div>
+
+    <div class="menu-tab-panel" id="menu-tab-ron">
+      <section class="section-block">
+        <div class="section-kicker">
+          <span class="num">01</span>
+          <span class="label">Ron Cartavio Clásico con Pepsi</span>
+        </div>
+        <div class="grid">
+
+          <div class="card">
+            <div class="tier">Combo 1</div>
+            <div class="pack-name">Ron Cartavio <span class="plus">+</span> Pepsi</div>
+            <div class="sizes">1L + 750ml</div>
+            <div class="price-row">
+              <span class="price-label">Precio</span>
+              <span class="price">S/ 60</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="tier">Combo 2</div>
+            <div class="pack-name">Ron Cartavio <span class="plus">+</span> Pepsi</div>
+            <div class="sizes">1L + 1L</div>
+            <div class="price-row">
+              <span class="price-label">Precio</span>
+              <span class="price">S/ 65</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="tier">Combo 3</div>
+            <div class="pack-name">Ron Cartavio <span class="plus">+</span> Pepsi</div>
+            <div class="sizes">1L + 1.5L</div>
+            <div class="price-row">
+              <span class="price-label">Precio</span>
+              <span class="price">S/ 70</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <section class="section-block">
+        <div class="section-kicker">
+          <span class="num">02</span>
+          <span class="label">Ron Cartavio Clásico con Coca Cola</span>
+        </div>
+        <div class="grid">
+
+          <div class="card">
+            <div class="tier">Combo 1</div>
+            <div class="pack-name">Ron Cartavio <span class="plus">+</span> Coca Cola</div>
+            <div class="sizes">1L + 1L</div>
+            <div class="price-row">
+              <span class="price-label">Precio</span>
+              <span class="price">S/ 65</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="tier">Combo 2</div>
+            <div class="pack-name">Ron Cartavio <span class="plus">+</span> Coca Cola</div>
+            <div class="sizes">1L + 1.5L</div>
+            <div class="price-row">
+              <span class="price-label">Precio</span>
+              <span class="price">S/ 70</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+    </div>
 
     <footer>
       <p>Precios en soles · <span class="glow">Disponible hoy</span></p>
-      <span class="hint">Elige un pack para desbloquear los juegos de la noche</span>
+      <span class="hint">Presiona el botón de juegos para la diversión de la noche</span>
     </footer>
   </div>
+
+  <script>
+    document.querySelectorAll(".menu-tab-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".menu-tab-btn").forEach(b => b.classList.remove("active"));
+        document.querySelectorAll(".menu-tab-panel").forEach(p => p.classList.remove("active"));
+        btn.classList.add("active");
+        document.getElementById("menu-tab-" + btn.dataset.menuTab).classList.add("active");
+      });
+    });
+  </script>
 </body>
 </html>
