@@ -23,6 +23,8 @@
 
 *{ box-sizing:border-box; margin:0; padding:0; }
 
+html{ font-size: 104%; }
+
 html, body{ height:100%; }
 
 body{
@@ -46,6 +48,27 @@ body::before{
   );
   pointer-events:none;
   z-index: 0;
+}
+
+body::after{
+  content:"";
+  position: fixed;
+  inset: -15%;
+  background:
+    radial-gradient(circle at 20% 25%, rgba(255,46,196,0.16), transparent 38%),
+    radial-gradient(circle at 80% 30%, rgba(41,224,255,0.14), transparent 40%),
+    radial-gradient(circle at 55% 85%, rgba(123,47,255,0.16), transparent 42%);
+  filter: blur(70px);
+  animation: neonDrift 24s ease-in-out infinite;
+  pointer-events:none;
+  z-index: 0;
+}
+
+@keyframes neonDrift{
+  0%   { transform: translate(0,0) scale(1); }
+  33%  { transform: translate(3%,-4%) scale(1.08); }
+  66%  { transform: translate(-4%,3%) scale(0.95); }
+  100% { transform: translate(0,0) scale(1); }
 }
 
 .wrap{ max-width: 720px; margin: 0 auto; position:relative; z-index:1; }
@@ -454,7 +477,7 @@ body::before{
 .wheel-label{
   fill: var(--ink);
   font-family:'Audiowide', sans-serif;
-  font-size: 10px;
+  font-size: 10.4px;
   text-transform: uppercase;
   letter-spacing: .4px;
   text-anchor: middle;
@@ -1220,7 +1243,7 @@ document.querySelectorAll(".tab-btn").forEach(btn => {
       const color = WHEEL_COLORS[i % WHEEL_COLORS.length];
       const label = players[i].length > maxChars ? players[i].slice(0, maxChars - 1) + "…" : players[i];
       svg += '<circle class="chip-bg" cx="' + p.x.toFixed(1) + '" cy="' + p.y.toFixed(1) + '" r="' + chipR.toFixed(1) + '" style="stroke:' + color + ';"></circle>';
-      svg += '<text class="wheel-label" x="' + p.x.toFixed(1) + '" y="' + p.y.toFixed(1) + '" style="font-size:' + (chipR > 16 ? 10 : 8.5) + 'px;">' + escapeXml(label) + '</text>';
+      svg += '<text class="wheel-label" x="' + p.x.toFixed(1) + '" y="' + p.y.toFixed(1) + '" style="font-size:' + (chipR > 16 ? 10.4 : 8.84) + 'px;">' + escapeXml(label) + '</text>';
     }
 
     // bottle group at center, pointing up by default (angle 0)

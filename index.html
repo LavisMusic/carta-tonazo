@@ -22,6 +22,8 @@
 
   *{box-sizing:border-box; margin:0; padding:0;}
 
+  html{ font-size: 104%; }
+
   body{
     background:
       radial-gradient(circle at 15% 8%, rgba(41,224,255,0.16), transparent 45%),
@@ -43,6 +45,27 @@
     );
     pointer-events:none;
     z-index: 0;
+  }
+
+  body::after{
+    content:"";
+    position: fixed;
+    inset: -15%;
+    background:
+      radial-gradient(circle at 20% 25%, rgba(255,46,196,0.16), transparent 38%),
+      radial-gradient(circle at 80% 30%, rgba(41,224,255,0.14), transparent 40%),
+      radial-gradient(circle at 55% 85%, rgba(123,47,255,0.16), transparent 42%);
+    filter: blur(70px);
+    animation: neonDrift 24s ease-in-out infinite;
+    pointer-events:none;
+    z-index: 0;
+  }
+
+  @keyframes neonDrift{
+    0%   { transform: translate(0,0) scale(1); }
+    33%  { transform: translate(3%,-4%) scale(1.08); }
+    66%  { transform: translate(-4%,3%) scale(0.95); }
+    100% { transform: translate(0,0) scale(1); }
   }
 
   .wrap{ max-width: 880px; margin: 0 auto; position:relative; z-index:1;}
@@ -157,6 +180,30 @@
     box-shadow: 0 0 26px rgba(255,46,196,0.28), 0 0 44px rgba(41,224,255,0.16);
   }
 
+  .card.combo-hot{
+    border-color: rgba(57,255,138,0.5);
+    animation: comboVibrate 0.28s infinite, comboGlow 1.6s ease-in-out infinite;
+  }
+
+  @keyframes comboGlow{
+    0%, 100% {
+      box-shadow: 0 0 12px rgba(57,255,138,0.3), 0 0 22px rgba(57,255,138,0.15);
+      border-color: rgba(57,255,138,0.4);
+    }
+    50% {
+      box-shadow: 0 0 30px rgba(57,255,138,0.85), 0 0 55px rgba(57,255,138,0.45);
+      border-color: rgba(57,255,138,0.95);
+    }
+  }
+
+  @keyframes comboVibrate{
+    0%, 100% { transform: translate(0,0); }
+    20% { transform: translate(-1px, 1px); }
+    40% { transform: translate(1px, -1px); }
+    60% { transform: translate(-1px, -1px); }
+    80% { transform: translate(1px, 1px); }
+  }
+
   .tier{
     font-family:'Audiowide', sans-serif;
     font-size: 0.78rem;
@@ -187,6 +234,12 @@
     color: var(--ink);
     opacity: 0.85;
     margin-bottom: 18px;
+  }
+
+  .cost-note{
+    font-size: 0.78rem;
+    color: var(--ink-dim);
+    margin-bottom: 14px;
   }
 
   .price-row{
@@ -329,75 +382,15 @@
 
     <div class="menu-tabs">
       <button class="menu-tab-btn" data-menu-tab="wisky">Pack con Wisky</button>
-      <button class="menu-tab-btn" data-menu-tab="vodka">Pack con Vodka</button>
       <button class="menu-tab-btn" data-menu-tab="ron">Pack con Ron</button>
       <button class="menu-tab-btn active" data-menu-tab="bebidas">Bebidas</button>
+      <button class="menu-tab-btn" data-menu-tab="platos">Platos</button>
     </div>
 
     <div class="menu-tab-panel" id="menu-tab-wisky">
       <section class="section-block">
         <div class="section-kicker">
           <span class="num">01</span>
-          <span class="label">Old Time Red</span>
-        </div>
-        <div class="grid">
-
-          <div class="card">
-            <div class="tier">Combo 1</div>
-            <div class="pack-name">Old Time RED <span class="plus">+</span> Guaraná</div>
-            <div class="sizes">750ml + 750ml</div>
-            <div class="price-row">
-              <span class="price-label">Precio</span>
-              <span class="price">S/ 50</span>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="tier">Combo 2</div>
-            <div class="pack-name">Old Time RED <span class="plus">+</span> Guaraná</div>
-            <div class="sizes">750ml + 1L</div>
-            <div class="price-row">
-              <span class="price-label">Precio</span>
-              <span class="price">S/ 55</span>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="tier">Combo 3</div>
-            <div class="pack-name">Old Time RED <span class="plus">+</span> Guaraná</div>
-            <div class="sizes">1L + 1L</div>
-            <div class="price-row">
-              <span class="price-label">Precio</span>
-              <span class="price">S/ 60</span>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="tier">Combo 4</div>
-            <div class="pack-name">Old Time RED <span class="plus">+</span> Everest</div>
-            <div class="sizes">750ml + 1.5L</div>
-            <div class="price-row">
-              <span class="price-label">Precio</span>
-              <span class="price">S/ 55</span>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="tier">Combo 5</div>
-            <div class="pack-name">Old Time RED <span class="plus">+</span> Everest</div>
-            <div class="sizes">1L + 1.5L</div>
-            <div class="price-row">
-              <span class="price-label">Precio</span>
-              <span class="price">S/ 60</span>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      <section class="section-block">
-        <div class="section-kicker">
-          <span class="num">02</span>
           <span class="label">Old Time Green</span>
         </div>
         <div class="grid">
@@ -405,16 +398,6 @@
           <div class="card">
             <div class="tier">Combo 1</div>
             <div class="pack-name">Old Time <span class="plus">+</span> Guaraná</div>
-            <div class="sizes">750ml + 750ml</div>
-            <div class="price-row">
-              <span class="price-label">Precio</span>
-              <span class="price">S/ 45</span>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="tier">Combo 2</div>
-            <div class="pack-name">Old Time <span class="plus">+</span> Guaraná</div>
             <div class="sizes">750ml + 1L</div>
             <div class="price-row">
               <span class="price-label">Precio</span>
@@ -423,54 +406,12 @@
           </div>
 
           <div class="card">
-            <div class="tier">Combo 3</div>
+            <div class="tier">Combo 2</div>
             <div class="pack-name">Old Time <span class="plus">+</span> Everest</div>
             <div class="sizes">750ml + 1.5L</div>
             <div class="price-row">
               <span class="price-label">Precio</span>
               <span class="price">S/ 55</span>
-            </div>
-          </div>
-
-        </div>
-      </section>
-    </div>
-
-    <div class="menu-tab-panel" id="menu-tab-vodka">
-      <section class="section-block">
-        <div class="section-kicker">
-          <span class="num">01</span>
-          <span class="label">Smirnoff Strawberry</span>
-        </div>
-        <div class="grid">
-
-          <div class="card">
-            <div class="tier">Combo 1</div>
-            <div class="pack-name">Smirnoff Strawberry <span class="plus">+</span> Everest</div>
-            <div class="sizes">750ml + 1.5L</div>
-            <div class="price-row">
-              <span class="price-label">Precio</span>
-              <span class="price">S/ 55</span>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      <section class="section-block">
-        <div class="section-kicker">
-          <span class="num">02</span>
-          <span class="label">Smirnoff Clásico</span>
-        </div>
-        <div class="grid">
-
-          <div class="card">
-            <div class="tier">Combo 1</div>
-            <div class="pack-name">Smirnoff <span class="plus">+</span> Everest</div>
-            <div class="sizes">1L + 1.5L</div>
-            <div class="price-row">
-              <span class="price-label">Precio</span>
-              <span class="price">S/ 60</span>
             </div>
           </div>
 
@@ -489,7 +430,8 @@
           <div class="card">
             <div class="tier">Combo 1</div>
             <div class="pack-name">Ron Cartavio <span class="plus">+</span> Pepsi</div>
-            <div class="sizes">1L + 750ml</div>
+            <div class="sizes">750ml + 1L</div>
+            <div class="cost-note">Costo: S/ 23 + S/ 3.50 = S/ 23.50</div>
             <div class="price-row">
               <span class="price-label">Precio</span>
               <span class="price">S/ 60</span>
@@ -499,20 +441,11 @@
           <div class="card">
             <div class="tier">Combo 2</div>
             <div class="pack-name">Ron Cartavio <span class="plus">+</span> Pepsi</div>
-            <div class="sizes">1L + 1L</div>
+            <div class="sizes">750ml + 1.5L</div>
+            <div class="cost-note">Costo: S/ 23 + S/ 6 = S/ 33</div>
             <div class="price-row">
               <span class="price-label">Precio</span>
               <span class="price">S/ 65</span>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="tier">Combo 3</div>
-            <div class="pack-name">Ron Cartavio <span class="plus">+</span> Pepsi</div>
-            <div class="sizes">1L + 1.5L</div>
-            <div class="price-row">
-              <span class="price-label">Precio</span>
-              <span class="price">S/ 70</span>
             </div>
           </div>
 
@@ -529,7 +462,8 @@
           <div class="card">
             <div class="tier">Combo 1</div>
             <div class="pack-name">Ron Cartavio <span class="plus">+</span> Coca Cola</div>
-            <div class="sizes">1L + 1L</div>
+            <div class="sizes">750ml + 1L</div>
+            <div class="cost-note">Costo: S/ 23 + S/ 4.90 = S/ 27.90</div>
             <div class="price-row">
               <span class="price-label">Precio</span>
               <span class="price">S/ 65</span>
@@ -539,7 +473,8 @@
           <div class="card">
             <div class="tier">Combo 2</div>
             <div class="pack-name">Ron Cartavio <span class="plus">+</span> Coca Cola</div>
-            <div class="sizes">1L + 1.5L</div>
+            <div class="sizes">750ml + 1.5L</div>
+            <div class="cost-note">Costo: S/ 23 + S/ 6.60 = S/ 29.60</div>
             <div class="price-row">
               <span class="price-label">Precio</span>
               <span class="price">S/ 70</span>
@@ -589,10 +524,58 @@
             </div>
           </div>
 
+          <div class="card">
+            <div class="pack-name">Four Loco</div>
+            <div class="price-row">
+              <span class="price-label">Precio</span>
+              <span class="price">S/ 15</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="pack-name">Mike's</div>
+            <div class="price-row">
+              <span class="price-label">Precio</span>
+              <span class="price">S/ 10</span>
+            </div>
+          </div>
+
         </div>
       </section>
     </div>
-    
+
+    <div class="menu-tab-panel" id="menu-tab-platos">
+      <section class="section-block">
+        <div class="section-kicker">
+          <span class="num">01</span>
+          <span class="label">De la Selva su Encanto</span>
+        </div>
+        <div class="grid">
+
+          <div class="card combo-hot">
+            <div class="tier">Combo 1</div>
+            <div class="pack-name">Patacones <span class="plus">+</span> Cecina <span class="plus">+</span> Chorizo ahumado</div>
+            <div class="sizes">Oferta: 2 platos</div>
+            <div class="price-row">
+              <span class="price-label">Precio</span>
+              <span class="price">S/ 12</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="tier">Combo 2</div>
+            <div class="pack-name">Patacones <span class="plus">+</span> Cecina <span class="plus">+</span> Chorizo ahumado</div>
+            <div class="sizes">1 plato</div>
+            <div class="price-row">
+              <span class="price-label">Precio</span>
+              <span class="price">S/ 7</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+    </div>
+
     <footer>
       <p>Precios en soles · <span class="glow">Disponible hoy</span></p>
       <span class="hint">Presiona el botón de juegos para la diversión de la noche</span>
