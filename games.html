@@ -217,17 +217,21 @@ body::before{
 
 /* ---------- YO NUNCA NUNCA ---------- */
 .teleprompter{
-  background: radial-gradient(circle at 50% 0%, rgba(41,224,255,0.06), transparent 60%), var(--bg-panel);
+  background:
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 3px),
+    radial-gradient(circle at 50% 0%, rgba(41,224,255,0.08), transparent 60%),
+    var(--bg-panel);
   border: 1px solid rgba(41,224,255,0.25);
   border-radius: 16px;
-  min-height: 200px;
+  min-height: 220px;
   display:flex;
   align-items:center;
   justify-content:center;
   text-align:center;
-  padding: 30px 22px;
+  padding: 40px 26px 30px;
   margin-bottom: 22px;
   position:relative;
+  overflow:hidden;
   box-shadow: inset 0 0 40px rgba(41,224,255,0.06);
   transition: box-shadow .3s ease, border-color .3s ease;
 }
@@ -238,6 +242,7 @@ body::before{
 }
 
 .teleprompter p{
+  position:relative;
   font-family:'Audiowide', sans-serif;
   font-size: 1.18rem;
   line-height: 1.5;
@@ -245,31 +250,88 @@ body::before{
   text-shadow: 0 0 10px rgba(244,240,255,0.15);
 }
 
-.timer-wrap{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap: 18px;
-  margin-bottom: 22px;
+/* glitch VHS on question change */
+.teleprompter p.glitch::before,
+.teleprompter p.glitch::after{
+  content: attr(data-text);
+  position:absolute; left:0; top:0; width:100%;
+  background: var(--bg-panel);
+}
+.teleprompter p.glitch::before{
+  color: var(--neon-pink);
+  clip-path: inset(0 0 58% 0);
+  animation: glitchTop .32s steps(2,end);
+  text-shadow: none;
+}
+.teleprompter p.glitch::after{
+  color: var(--neon-cyan);
+  clip-path: inset(58% 0 0 0);
+  animation: glitchBottom .32s steps(2,end);
+  text-shadow: none;
+}
+@keyframes glitchTop{
+  0%{ transform: translate(-4px,-2px); opacity: .9; }
+  35%{ transform: translate(4px,-1px); }
+  70%{ transform: translate(-2px,1px); }
+  100%{ transform: translate(0,0); opacity: 0; }
+}
+@keyframes glitchBottom{
+  0%{ transform: translate(4px,2px); opacity: .9; }
+  35%{ transform: translate(-4px,1px); }
+  70%{ transform: translate(2px,-1px); }
+  100%{ transform: translate(0,0); opacity: 0; }
+}
+.teleprompter.scan-glitch::before{
+  content:"";
+  position:absolute; inset:0;
+  background: repeating-linear-gradient(0deg, rgba(255,255,255,0.06) 0px, transparent 2px, transparent 4px);
+  mix-blend-mode: overlay;
+  animation: scanJump .32s steps(2,end);
+  pointer-events:none;
+}
+@keyframes scanJump{
+  0%{ transform: translateY(0); }
+  50%{ transform: translateY(3px); }
+  100%{ transform: translateY(0); }
 }
 
-.timer-ring{ position:relative; width: 78px; height:78px; }
-.timer-ring svg{ transform: rotate(-90deg); width:100%; height:100%; }
-.timer-ring circle{ fill:none; stroke-width: 6; }
-.timer-ring .bg{ stroke: rgba(255,255,255,0.08); }
-.timer-ring .fg{ stroke: var(--neon-lime); stroke-linecap: round; filter: drop-shadow(0 0 6px rgba(228,255,46,0.7)); transition: stroke-dashoffset 1s linear; }
+/* timer integrated into the teleprompter corner */
+.tp-timer{
+  position:absolute;
+  top: 12px; right: 14px;
+  width: 54px; height:54px;
+}
+.tp-timer svg{ transform: rotate(-90deg); width:100%; height:100%; }
+.tp-timer circle{ fill:none; stroke-width: 6; }
+.tp-timer .bg{ stroke: rgba(255,255,255,0.08); }
+.tp-timer .fg{
+  stroke: var(--neon-lime);
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 6px rgba(228,255,46,0.7));
+  transition: stroke-dashoffset 1s linear, stroke .3s ease, filter .3s ease;
+}
+.tp-timer.time-warn .fg{ stroke: #ffcc2e; filter: drop-shadow(0 0 7px rgba(255,204,46,0.75)); }
+.tp-timer.time-danger .fg{ stroke: var(--neon-red); filter: drop-shadow(0 0 9px rgba(255,51,85,0.85)); }
+.tp-timer.time-danger .timer-num{ color: var(--neon-red); animation: numPulse .6s ease infinite; }
+.tp-timer.time-warn .timer-num{ color: #ffcc2e; }
+
 .timer-num{
   position:absolute; inset:0;
   display:flex; align-items:center; justify-content:center;
   font-family:'Audiowide', sans-serif;
-  font-size: 1.05rem;
+  font-size: 0.95rem;
   color: var(--neon-lime);
+  transition: color .3s ease;
 }
+@keyframes numPulse{ 0%,100%{ transform:scale(1);} 50%{ transform:scale(1.18);} }
 
-.round-count{
+.tp-round{
+  position:absolute;
+  top: 16px; left: 18px;
   color: var(--ink-dim);
-  font-size: 0.85rem;
-  letter-spacing: 1px;
+  font-size: 0.75rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
 }
 
 /* ---------- BOTELLA BORRACHA ---------- */
@@ -348,22 +410,74 @@ body::before{
   gap: 22px;
 }
 
+.wheel-stage{ perspective: 900px; }
+
 .wheel-outer{
   position:relative;
   width: min(320px, 78vw);
   height: min(320px, 78vw);
 }
 
-.wheel-outer svg{ width:100%; height:100%; overflow:visible; }
+.wheel-outer svg{
+  width:100%; height:100%; overflow:visible;
+  transform: rotateX(8deg);
+  transform-origin: 50% 60%;
+  filter: drop-shadow(0 24px 26px rgba(0,0,0,0.5));
+  transition: filter .3s ease;
+}
+
+.wheel-outer.spinning svg{
+  filter: drop-shadow(0 24px 26px rgba(0,0,0,0.5)) drop-shadow(0 0 26px rgba(41,224,255,0.35));
+}
 
 .wheel-ring{ fill: rgba(255,255,255,0.02); stroke: var(--neon-purple); stroke-width: 2; filter: drop-shadow(0 0 10px rgba(123,47,255,0.5)); }
-.wheel-line{ stroke: rgba(255,255,255,0.18); stroke-width: 1.5; }
+
+.wheel-wedge{
+  stroke: rgba(6,4,18,0.7);
+  stroke-width: 2;
+  transition: opacity .3s ease;
+}
+.wheel-wedge.win{
+  animation: wedgeWin .85s ease-in-out infinite;
+}
+@keyframes wedgeWin{
+  0%,100%{ filter: brightness(1) saturate(1); opacity: 0.55; }
+  50%{ filter: brightness(1.9) saturate(1.4); opacity: 0.95; }
+}
+
+.wheel-line{ stroke: rgba(255,255,255,0.22); stroke-width: 1.5; }
+
+.chip-bg{
+  stroke-width: 1.4;
+  fill: rgba(8,6,20,0.75);
+}
 .wheel-label{
-  fill: var(--ink-dim);
-  font-family:'Space Grotesk', sans-serif;
-  font-size: 11px;
+  fill: var(--ink);
+  font-family:'Audiowide', sans-serif;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: .4px;
   text-anchor: middle;
   dominant-baseline: middle;
+}
+
+/* rotating comet trail ring, only visible while spinning */
+.spin-trail{
+  fill:none;
+  stroke: var(--neon-cyan);
+  stroke-width: 3;
+  stroke-linecap: round;
+  opacity: 0;
+  transform-origin: 50% 50%;
+  filter: drop-shadow(0 0 10px rgba(41,224,255,0.9));
+}
+.wheel-outer.spinning .spin-trail{
+  opacity: 1;
+  animation: spinTrailRotate .5s linear infinite;
+}
+@keyframes spinTrailRotate{
+  from{ transform: rotate(0deg); }
+  to{ transform: rotate(360deg); }
 }
 
 .bottle-group{
@@ -372,8 +486,13 @@ body::before{
   transition: transform 3.2s cubic-bezier(.17,.67,.2,1.01);
 }
 
-.bottle-body{ fill: #0d3b3f; stroke: var(--neon-cyan); stroke-width: 2; filter: drop-shadow(0 0 8px rgba(41,224,255,0.7)); }
-.bottle-neck{ fill: #0d3b3f; stroke: var(--neon-cyan); stroke-width: 2; }
+.bottle-group.spinning .bottle-body,
+.bottle-group.spinning .bottle-neck{
+  filter: drop-shadow(0 0 14px rgba(41,224,255,1)) blur(0.35px);
+}
+
+.bottle-body{ fill: #0d3b3f; stroke: var(--neon-cyan); stroke-width: 2; filter: drop-shadow(0 0 8px rgba(41,224,255,0.7)); transition: filter .2s ease; }
+.bottle-neck{ fill: #0d3b3f; stroke: var(--neon-cyan); stroke-width: 2; transition: filter .2s ease; }
 .bottle-highlight{ fill: rgba(41,224,255,0.35); }
 
 .spin-hint{
@@ -467,18 +586,15 @@ body::before{
       </div>
 
       <div class="step" id="yn-play">
-        <div class="timer-wrap">
-          <div class="timer-ring">
+        <div class="teleprompter" id="yn-box">
+          <div class="tp-round" id="yn-round">Ronda 1</div>
+          <div class="tp-timer" id="tp-timer">
             <svg viewBox="0 0 80 80">
               <circle class="bg" cx="40" cy="40" r="34"></circle>
               <circle class="fg" id="yn-ring" cx="40" cy="40" r="34"></circle>
             </svg>
             <div class="timer-num" id="yn-time">60</div>
           </div>
-          <div class="round-count" id="yn-round">Ronda 1</div>
-        </div>
-
-        <div class="teleprompter" id="yn-box">
           <p id="yn-question">Cargando...</p>
         </div>
 
@@ -679,9 +795,7 @@ const YN_QUESTIONS = [
   "Yo nunca nunca he traicionado a un amigo.",
   "Yo nunca nunca hui de la policia.",
   "Yo nunca nunca estuve en el calabozo.",
-  "Yo nunca nunca maneje sin licencia.",
-  "Yo nunca nunca me he metido con un menor",
-  "Yo nunca nunca me he metido con un mayor."
+  "Yo nunca nunca maneje sin licencia."
 ];
 
 const BB_QUESTIONS = [
@@ -890,16 +1004,37 @@ document.querySelectorAll(".tab-btn").forEach(btn => {
   const timeEl = document.getElementById("yn-time");
   const roundEl = document.getElementById("yn-round");
   const boxEl = document.getElementById("yn-box");
+  const tpTimerEl = document.getElementById("tp-timer");
 
   function renderQuestion(){
-    qEl.textContent = ynPool[idx];
+    const text = ynPool[idx];
+    qEl.textContent = text;
+    qEl.dataset.text = text;
     roundEl.textContent = "Ronda " + round;
+
+    qEl.classList.remove("glitch");
+    boxEl.classList.remove("scan-glitch");
+    // force reflow so the animation can restart
+    void qEl.offsetWidth;
+    qEl.classList.add("glitch");
+    boxEl.classList.add("scan-glitch");
+    setTimeout(() => {
+      qEl.classList.remove("glitch");
+      boxEl.classList.remove("scan-glitch");
+    }, 340);
   }
 
   function updateRing(){
     const offset = RING_C * (1 - timeLeft / 60);
     ring.style.strokeDashoffset = offset.toFixed(2);
     timeEl.textContent = timeLeft;
+
+    tpTimerEl.classList.remove("time-warn", "time-danger");
+    if (timeLeft <= 10){
+      tpTimerEl.classList.add("time-danger");
+    } else if (timeLeft <= 20){
+      tpTimerEl.classList.add("time-warn");
+    }
   }
 
   function tick(){
@@ -1038,12 +1173,40 @@ document.querySelectorAll(".tab-btn").forEach(btn => {
     };
   }
 
+  const WHEEL_COLORS = ['#ff2ec4', '#29e0ff', '#7b2fff', '#e4ff2e', '#6fe0ff', '#ff3355'];
+
+  function wedgePath(startAngle, endAngle, r){
+    const startRad = startAngle * Math.PI / 180 - Math.PI / 2;
+    const endRad = endAngle * Math.PI / 180 - Math.PI / 2;
+    const x1 = (CENTER + r * Math.cos(startRad)).toFixed(2);
+    const y1 = (CENTER + r * Math.sin(startRad)).toFixed(2);
+    const x2 = (CENTER + r * Math.cos(endRad)).toFixed(2);
+    const y2 = (CENTER + r * Math.sin(endRad)).toFixed(2);
+    const largeArc = (endAngle - startAngle) > 180 ? 1 : 0;
+    return 'M' + CENTER + ',' + CENTER + ' L' + x1 + ',' + y1 + ' A' + r + ',' + r + ' 0 ' + largeArc + ' 1 ' + x2 + ',' + y2 + ' Z';
+  }
+
   function buildWheel(){
     const n = players.length;
     const step = 360 / n;
+    const chipR = Math.max(11, Math.min(20, (2 * Math.PI * (RADIUS * 0.8) / n) / 2.3));
+    const maxChars = chipR > 16 ? 10 : chipR > 13 ? 7 : 5;
     let svg = '<svg viewBox="0 0 ' + SIZE + ' ' + SIZE + '">';
 
+    // colored wedges (one per player)
+    for (let i = 0; i < n; i++){
+      const color = WHEEL_COLORS[i % WHEEL_COLORS.length];
+      const d = wedgePath(i * step, (i + 1) * step, RADIUS);
+      svg += '<path class="wheel-wedge" id="wedge-' + i + '" d="' + d + '" style="fill:' + color + '; fill-opacity:0.22; color:' + color + ';"></path>';
+    }
+
     svg += '<circle class="wheel-ring" cx="' + CENTER + '" cy="' + CENTER + '" r="' + RADIUS + '"></circle>';
+
+    // comet trail ring, animated only while spinning
+    const trailR = RADIUS + 11;
+    const trailC = 2 * Math.PI * trailR;
+    svg += '<circle class="spin-trail" cx="' + CENTER + '" cy="' + CENTER + '" r="' + trailR
+      + '" stroke-dasharray="' + (trailC * 0.16).toFixed(1) + ' ' + (trailC * 0.84).toFixed(1) + '"></circle>';
 
     for (let i = 0; i < n; i++){
       const angle = i * step;
@@ -1053,9 +1216,11 @@ document.querySelectorAll(".tab-btn").forEach(btn => {
 
     for (let i = 0; i < n; i++){
       const labelAngle = i * step + step / 2;
-      const p = polar(labelAngle, RADIUS * 0.78);
-      const label = players[i].length > 10 ? players[i].slice(0,9) + "…" : players[i];
-      svg += '<text class="wheel-label" x="' + p.x.toFixed(1) + '" y="' + p.y.toFixed(1) + '">' + escapeXml(label) + '</text>';
+      const p = polar(labelAngle, RADIUS * 0.8);
+      const color = WHEEL_COLORS[i % WHEEL_COLORS.length];
+      const label = players[i].length > maxChars ? players[i].slice(0, maxChars - 1) + "…" : players[i];
+      svg += '<circle class="chip-bg" cx="' + p.x.toFixed(1) + '" cy="' + p.y.toFixed(1) + '" r="' + chipR.toFixed(1) + '" style="stroke:' + color + ';"></circle>';
+      svg += '<text class="wheel-label" x="' + p.x.toFixed(1) + '" y="' + p.y.toFixed(1) + '" style="font-size:' + (chipR > 16 ? 10 : 8.5) + 'px;">' + escapeXml(label) + '</text>';
     }
 
     // bottle group at center, pointing up by default (angle 0)
@@ -1080,6 +1245,11 @@ document.querySelectorAll(".tab-btn").forEach(btn => {
   function spinBottle(){
     if (spinning) return;
     spinning = true;
+
+    document.querySelectorAll(".wheel-wedge.win").forEach(w => w.classList.remove("win"));
+    wheelOuter.classList.add("spinning");
+    bottleGroup.classList.add("spinning");
+
     const n = players.length;
     const step = 360 / n;
     const chosen = Math.floor(Math.random() * n);
@@ -1093,6 +1263,10 @@ document.querySelectorAll(".tab-btn").forEach(btn => {
 
     setTimeout(() => {
       spinning = false;
+      wheelOuter.classList.remove("spinning");
+      bottleGroup.classList.remove("spinning");
+      const wedgeEl = document.getElementById("wedge-" + chosen);
+      if (wedgeEl) wedgeEl.classList.add("win");
       openResult(players[chosen]);
     }, 3300);
   }
