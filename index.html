@@ -170,11 +170,11 @@
     border-radius: 14px;
     padding: 1px;
     background: linear-gradient(135deg, var(--neon-pink), transparent 40%, var(--neon-cyan));
-    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    opacity: 0.5;
-  }
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+}
 
   .card:hover, .card:focus-visible{
     transform: translateY(-4px);
@@ -535,16 +535,7 @@
             </div>
           </div>
 
-          <div class="card">
-            <div class="tier">Combo 2</div>
-            <div class="pack-name">Ron Cartavio <span class="plus">+</span> Coca Cola</div>
-            <div class="sizes">750ml + 1.5L</div>
-            <div class="price-row">
-              <span class="price-label">Precio</span>
-              <span class="price">S/ 70</span>
-            </div>
-          </div>
-
+          
         </div>
       </section>
     </div>
@@ -564,15 +555,6 @@
 
           <div class="card">
             <div class="pack-name">Guaraná</div>
-            <div class="sizes">Personal</div>
-            <div class="price-row">
-              <span class="price-label">Precio</span>
-              <span class="price">S/ 5</span>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="pack-name">Pepsi</div>
             <div class="sizes">Personal</div>
             <div class="price-row">
               <span class="price-label">Precio</span>
