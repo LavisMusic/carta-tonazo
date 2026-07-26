@@ -25,7 +25,13 @@
 
 html{ font-size: 100%; }
 
-body{ zoom: 1.75; }
+/* El "zoom" agranda todo para que se vea bien en pantallas anchas (PC/tablet).
+   En el celular NO se aplica: así el layout usa su ancho real disponible
+   y no se aprietan ni se superponen los elementos (por ejemplo, el cronómetro
+   sobre el texto de la pregunta). */
+@media (min-width: 768px){
+  body{ zoom: 1.75; }
+}
 
 html, body{ height:100%; }
 
